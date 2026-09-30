@@ -1,6 +1,8 @@
 # Portfolio
 
-Site de portfólio desenvolvido com **React + Vite**.
+Portfólio de **Talisson Vitorino**, desenvolvido com **React + Vite**.
+
+Site: https://talissonvitorino.github.io/portfolio/
 
 ---
 
@@ -10,7 +12,8 @@ Site de portfólio desenvolvido com **React + Vite**.
 |---|---|
 | React | UI framework |
 | Vite | Build tool |
-| TypeScript | Linguagem |
+| Tailwind CSS | Estilos |
+| Framer Motion | Animações |
 
 ---
 
@@ -20,3 +23,8 @@ Site de portfólio desenvolvido com **React + Vite**.
 npm install
 npm run dev
 ```
+
+## Deploy
+
+Todo push na branch `master` publica o site no GitHub Pages pelo workflow
+`.github/workflows/deploy.yml`. Em **Settings → Pages**, a fonte deve ser **GitHub Actions**.

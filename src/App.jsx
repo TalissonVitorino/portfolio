@@ -271,7 +271,7 @@ function FloatingAndroid() {
       className="w-[200px] bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-hidden"
     >
       <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
-        <div className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono">Cotacao App</div>
+        <div className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono">Cotação App</div>
         <div className="flex items-baseline gap-2 mt-1">
           <span className="text-lg font-bold text-zinc-900 dark:text-white">USD/BRL</span>
           <span className="text-xs text-emerald-500 font-medium">+1.2%</span>
@@ -412,7 +412,7 @@ function Hero() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
               <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
               <span className="text-xs font-medium text-violet-600 dark:text-violet-400">
-                Disponivel para oportunidades
+                Disponível para oportunidades
               </span>
             </div>
 
@@ -425,7 +425,7 @@ function Hero() {
             </h1>
 
             <p className="mt-6 text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-xl">
-              Arquitetura limpa, codigo avaliavel e projetos que falam por si.
+              Arquitetura limpa, código avaliável e projetos que falam por si.
               Foco em{" "}
               <strong className="text-zinc-700 dark:text-zinc-300">
                 Jetpack Compose, KMP, Ktor e Spring Boot
@@ -481,22 +481,22 @@ const snapshotCards = [
   {
     icon: Icons.code,
     title: "Stack Principal",
-    items: ["Kotlin / Java", "Jetpack Compose", "KMP", "Ktor / Spring Boot"],
+    items: ["Kotlin / Java", "Jetpack Compose", "KMP + iOS", "Ktor / Spring Boot"],
   },
   {
     icon: Icons.smartphone,
     title: "Tipo de Entrega",
-    items: ["Apps Android nativos", "APIs REST robustas", "Projetos multiplataforma"],
+    items: ["Apps Android e KMP", "APIs REST robustas", "Ferramentas open source"],
   },
   {
     icon: Icons.check,
     title: "O que Avaliar",
-    items: ["Codigo no GitHub", "Arquitetura dos projetos", "README detalhado"],
+    items: ["Código no GitHub", "Arquitetura dos projetos", "README detalhado"],
   },
   {
     icon: Icons.server,
-    title: "Disponibilidade",
-    items: ["Portfolio aberto", "Projetos documentados", "Codigo revisavel"],
+    title: "Open Source",
+    items: ["Plugins Gradle e libs", "Contribuidor na CodandoTV", "Projetos documentados"],
   },
 ];
 
@@ -506,10 +506,10 @@ function RecruiterSnapshot() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">
-            Visao Rapida para Recrutadores
+            Visão Rápida para Recrutadores
           </h2>
           <p className="mt-3 text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto">
-            Entenda meu perfil em segundos. Sem enrolacao.
+            Entenda meu perfil em segundos. Sem enrolação.
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -608,34 +608,156 @@ function KtorPreview() {
 
 // ─── Projects Section ────────────────────────────────────────────────────────
 
+function GradientPreview({ from, to, label, lines }) {
+  return (
+    <div
+      className={`w-full h-40 bg-gradient-to-br ${from} ${to} rounded-xl p-4 flex flex-col items-center justify-center text-center overflow-hidden`}
+    >
+      <span className="text-2xl font-bold text-zinc-800 dark:text-zinc-100 tracking-tight">{label}</span>
+      <div className="mt-3 space-y-1 font-mono text-[10px] text-zinc-500 dark:text-zinc-400">
+        {lines.map((l) => (
+          <div key={l}>{l}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const projects = [
   {
-    title: "Cotacao Multiplatform",
+    title: "Popcorn Guineapig",
+    subtitle: "Plugin Gradle \u2022 Arquitetura em multi-módulos",
+    description:
+      "Plugin que valida o grafo de dependências entre módulos contra regras declaradas pelo time (NoDependency, JustWith, DoNotWith) e gera relatórios de erro e métricas. Publicado no Maven Central e documentado com GitHub Pages.",
+    highlights: ["Maven Central", "Relatórios de métricas", "Skill para IA"],
+    stack: ["Kotlin", "Gradle", "Kover", "Detekt", "GitHub Actions"],
+    repo: "https://github.com/CodandoTV/popcorn-guineapig",
+    site: "https://codandotv.github.io/popcorn-guineapig/",
+    preview: (
+      <GradientPreview
+        from="from-violet-500/10"
+        to="to-fuchsia-500/10"
+        label="Popcorn GP"
+        lines={[":feature  →  :data   ✗", ":domain   →  :data   ✓"]}
+      />
+    ),
+  },
+  {
+    title: "kmp-ios-skills",
+    subtitle: "Agent skills \u2022 Kotlin Multiplatform + iOS",
+    description:
+      "Coleção com 108 skills para agentes de IA em KMP e iOS, organizadas em iOS, KMP, Android, multiplataforma e workflow. Instalação por área com a CLI skills, compatível com Claude Code, Codex, Cursor, Copilot e Gemini.",
+    highlights: ["108 skills", "Multi-agente", "Instalação modular"],
+    stack: ["KMP", "Swift", "SwiftUI", "Compose", "Claude Code"],
+    repo: "https://github.com/TalissonVitorino/kmp-ios-skills",
+    preview: (
+      <GradientPreview
+        from="from-sky-500/10"
+        to="to-indigo-500/10"
+        label="108 skills"
+        lines={["ios · kmp · android", "cross-platform · workflow"]}
+      />
+    ),
+  },
+  {
+    title: "CraftD",
+    subtitle: "Server-Driven UI \u2022 Android, iOS, Flutter e KMP",
+    description:
+      "Framework para implementar Server-Driven UI de forma rápida em View System, Jetpack Compose, Compose Multiplatform, SwiftUI e Flutter. Biblioteca publicada no pub.dev e com site de documentação.",
+    highlights: ["5 plataformas", "Publicado no pub.dev", "Open source"],
+    stack: ["Kotlin", "Compose", "Flutter", "SwiftUI", "Server-Driven UI"],
+    repo: "https://github.com/CodandoTV/CraftD",
+    site: "https://codandotv.github.io/CraftD",
+    preview: (
+      <GradientPreview
+        from="from-amber-500/10"
+        to="to-rose-500/10"
+        label="CraftD"
+        lines={['{ "type": "text" }', "→ Android · iOS · Flutter"]}
+      />
+    ),
+  },
+  {
+    title: "EagleEye",
+    subtitle: "CLI em Dart \u2022 Arquitetura em Flutter",
+    description:
+      "Ferramenta de linha de comando que detecta violações de arquitetura em projetos Dart por padrões de arquivo e dependências proibidas, com geração de configuração assistida por IA.",
+    highlights: ["Regras configuráveis", "CLI leve", "Publicado no pub.dev"],
+    stack: ["Dart", "Flutter", "CLI", "JSON"],
+    repo: "https://github.com/CodandoTV/eagle-eye",
+    site: "https://codandotv.github.io/eagle-eye/",
+    preview: (
+      <GradientPreview
+        from="from-cyan-500/10"
+        to="to-blue-500/10"
+        label="EagleEye"
+        lines={["*/model/*  →  sem imports", "dart run eagle_eye:main"]}
+      />
+    ),
+  },
+  {
+    title: "JujubaSVG",
+    subtitle: "Biblioteca \u2022 Compose Multiplatform e Flutter",
+    description:
+      "Biblioteca para manipular SVGs com controle fino: acesse qualquer elemento pelo ID e altere cor de fundo, traço e outros atributos. Disponível no Maven Central e no pub.dev.",
+    highlights: ["Maven Central", "pub.dev", "Edição por ID"],
+    stack: ["Kotlin", "Compose Multiplatform", "Flutter", "SVG"],
+    repo: "https://github.com/CodandoTV/jujubaSVG",
+    site: "https://codandotv.github.io/jujubaSVG/",
+    preview: (
+      <GradientPreview
+        from="from-emerald-500/10"
+        to="to-lime-500/10"
+        label="JujubaSVG"
+        lines={['commander.fill("id", Red)', "Compose · Flutter"]}
+      />
+    ),
+  },
+  {
+    title: "Awesome AI Coding Assistants",
+    subtitle: "Curadoria \u2022 Playbook de assistentes de IA",
+    description:
+      "Mapa centralizado de referências para configurar assistentes de código com IA: skills, instruções, prompts, agentes, regras e ferramentas de SDD para Claude, Copilot, Cursor, Gemini e outros. Disponível em inglês e português.",
+    highlights: ["Bilíngue", "Comunidade", "Aceita PRs"],
+    stack: ["Claude Code", "Copilot", "Cursor", "Gemini", "OpenCode"],
+    repo: "https://github.com/CodandoTV/awesome-ai-coding-assistants-playbook",
+    preview: (
+      <GradientPreview
+        from="from-violet-500/10"
+        to="to-blue-500/10"
+        label="AI Playbook"
+        lines={["skills · agents · rules", "prompts · SDD tools"]}
+      />
+    ),
+  },
+  {
+    title: "Cotação Multiplatform",
     subtitle: "Android + Desktop \u2022 Kotlin Multiplatform",
     description:
-      "App de cotacao de moedas em tempo real com KMP. Arquitetura MVVM, StateFlow e integracao com AwesomeAPI. Roda em Android e Desktop com codigo compartilhado.",
+      "App de cotação de moedas em tempo real com KMP. Arquitetura MVVM, StateFlow e integração com AwesomeAPI. Roda em Android e Desktop com código compartilhado.",
     highlights: ["Multiplataforma real", "Reatividade com StateFlow", "API em tempo real"],
     stack: ["Kotlin", "KMP", "Compose", "MVVM", "StateFlow", "AwesomeAPI"],
-    repo: "https://github.com/TalissonVitorino",
+    repo: "https://github.com/TalissonVitorino/CotacaoMoedasWithKotlinMultiplatform",
     preview: <CotacaoPreview />,
   },
   {
     title: "Nutrivox",
-    subtitle: "Conceito de Produto \u2022 UX Clinica",
+    subtitle: "Conceito de Produto \u2022 UX Clínica",
     description:
-      "Conceito de app voltado para nutricao com assistencia de IA nao prescritiva. Foco em experiencia clinica limpa, acessibilidade e fluxos intuitivos.",
-    highlights: ["IA assistiva", "UX clinica", "Design acessivel"],
+      "Conceito de app voltado para nutrição com assistência de IA não prescritiva. Foco em experiência clínica limpa, acessibilidade e fluxos intuitivos.",
+    highlights: ["IA assistiva", "UX clínica", "Design acessível"],
     stack: ["Kotlin", "Compose", "MVVM", "Room", "Material 3"],
+    repo: "https://github.com/TalissonVitorino/Nutrivox",
     preview: <NutrivoxPreview />,
   },
   {
     title: "Ktor Minhas Tarefas",
     subtitle: "REST API \u2022 Backend com Kotlin",
     description:
-      "API REST completa para gerenciamento de tarefas. Serializacao com kotlinx, rotas tipadas e container Docker pronto para deploy.",
-    highlights: ["CRUD completo", "Docker ready", "Serializacao tipada"],
+      "API REST completa para gerenciamento de tarefas. Serialização com kotlinx, rotas tipadas e container Docker pronto para deploy.",
+    highlights: ["CRUD completo", "Docker ready", "Serialização tipada"],
     stack: ["Kotlin", "Ktor", "Serialization", "Docker", "MySQL"],
-    repo: "https://github.com/TalissonVitorino",
+    repo: "https://github.com/TalissonVitorino/ktor-minhas-tarefas",
     preview: <KtorPreview />,
   },
 ];
@@ -673,18 +795,31 @@ function ProjectCard({ project, index }) {
           ))}
         </div>
 
-        {project.repo && (
-          <a
-            href={project.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-5 text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors"
-          >
-            {Icons.github}
-            Ver repositorio
-            {Icons.external}
-          </a>
-        )}
+        <div className="flex flex-wrap gap-x-5 gap-y-2 mt-5">
+          {project.repo && (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors"
+            >
+              {Icons.github}
+              Ver repositório
+              {Icons.external}
+            </a>
+          )}
+          {project.site && (
+            <a
+              href={project.site}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+            >
+              Documentação
+              {Icons.external}
+            </a>
+          )}
+        </div>
       </div>
     </motion.div>
   );
@@ -696,10 +831,10 @@ function Projects() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">
-            Projetos Principais
+            Projetos
           </h2>
           <p className="mt-3 text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto">
-            Projetos reais com codigo aberto, documentacao e decisoes tecnicas claras.
+            Projetos reais com código aberto, documentação e decisões técnicas claras.
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -729,12 +864,20 @@ function About() {
             <p>
               Trabalho com <strong className="text-zinc-700 dark:text-zinc-300">Jetpack Compose</strong> para interfaces
               nativas, <strong className="text-zinc-700 dark:text-zinc-300">Kotlin Multiplatform</strong> para compartilhar
-              logica entre plataformas, e <strong className="text-zinc-700 dark:text-zinc-300">Ktor / Spring Boot</strong>{" "}
+              lógica entre plataformas, e <strong className="text-zinc-700 dark:text-zinc-300">Ktor / Spring Boot</strong>{" "}
               para APIs robustas.
             </p>
             <p>
+              Na <strong className="text-zinc-700 dark:text-zinc-300">CodandoTV</strong> contribuo com projetos open source
+              como <strong className="text-zinc-700 dark:text-zinc-300">Popcorn Guineapig</strong>,{" "}
+              <strong className="text-zinc-700 dark:text-zinc-300">CraftD</strong>,{" "}
+              <strong className="text-zinc-700 dark:text-zinc-300">EagleEye</strong> e{" "}
+              <strong className="text-zinc-700 dark:text-zinc-300">JujubaSVG</strong>, além de pesquisar o uso de
+              assistentes de IA no desenvolvimento, como no <strong className="text-zinc-700 dark:text-zinc-300">kmp-ios-skills</strong>.
+            </p>
+            <p>
               Minha abordagem prioriza <strong className="text-zinc-700 dark:text-zinc-300">arquitetura limpa</strong>,
-              codigo legivel e projetos que qualquer recrutador ou tech lead pode avaliar diretamente pelo GitHub.
+              código legível e projetos que qualquer recrutador ou tech lead pode avaliar diretamente pelo GitHub.
             </p>
           </div>
         </div>
@@ -753,6 +896,10 @@ const stackItems = [
   "Kotlin Multiplatform",
   "Ktor",
   "Spring Boot",
+  "Swift / SwiftUI",
+  "Flutter / Dart",
+  "Gradle Plugins",
+  "GitHub Actions",
   "StateFlow",
   "Clean Architecture",
   "MVVM",
