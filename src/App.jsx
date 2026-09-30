@@ -28,21 +28,26 @@ function useTheme() {
 function AnimatedBg() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
-      <div className="absolute inset-0 bg-white dark:bg-[#0a0a0f] transition-colors duration-500" />
+      <div className="absolute inset-0 bg-[#f2f2f7] dark:bg-black transition-colors duration-500" />
       <motion.div
-        className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-violet-500/10 dark:bg-violet-500/5 blur-[120px]"
-        animate={{ x: [0, 80, 0], y: [0, 40, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[-15%] left-[-10%] w-[620px] h-[620px] rounded-full bg-violet-500/35 dark:bg-violet-600/30 blur-[110px]"
+        animate={{ x: [0, 90, 0], y: [0, 50, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-blue-500/10 dark:bg-blue-500/5 blur-[120px]"
-        animate={{ x: [0, -60, 0], y: [0, -50, 0] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-[-10%] right-[-10%] w-[560px] h-[560px] rounded-full bg-sky-400/35 dark:bg-blue-600/30 blur-[110px]"
+        animate={{ x: [0, -70, 0], y: [0, -60, 0] }}
+        transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-[40%] right-[20%] w-[400px] h-[400px] rounded-full bg-emerald-500/8 dark:bg-emerald-500/4 blur-[100px]"
-        animate={{ x: [0, -40, 0], y: [0, 60, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[35%] right-[15%] w-[420px] h-[420px] rounded-full bg-pink-400/30 dark:bg-fuchsia-600/20 blur-[100px]"
+        animate={{ x: [0, -50, 0], y: [0, 70, 0] }}
+        transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-[55%] left-[10%] w-[360px] h-[360px] rounded-full bg-emerald-300/30 dark:bg-emerald-500/15 blur-[100px]"
+        animate={{ x: [0, 60, 0], y: [0, -40, 0] }}
+        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
       />
     </div>
   );
@@ -141,8 +146,8 @@ function Chip({ children, accent }) {
     <span
       className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-colors ${
         accent
-          ? "bg-violet-500/15 text-violet-600 dark:text-violet-400 border border-violet-500/20"
-          : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800/60 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50"
+          ? "bg-violet-500/15 text-violet-700 dark:text-violet-300 ring-1 ring-inset ring-violet-500/25"
+          : "bg-black/5 text-zinc-600 dark:bg-white/10 dark:text-zinc-300 ring-1 ring-inset ring-black/5 dark:ring-white/10"
       }`}
     >
       {children}
@@ -153,111 +158,86 @@ function Chip({ children, accent }) {
 // ─── Navbar ──────────────────────────────────────────────────────────────────
 
 function Navbar({ dark, toggleTheme }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
   const links = [
-    { label: "Projetos", href: "#projetos" },
-    { label: "Outros", href: "#outros" },
-    { label: "Sobre", href: "#sobre" },
-    { label: "Stack", href: "#stack" },
-    { label: "Contato", href: "#contato" },
+    { label: "Projetos", href: "#projetos", icon: Icons.code },
+    { label: "Outros", href: "#outros", icon: Icons.smartphone },
+    { label: "Sobre", href: "#sobre", icon: Icons.check },
+    { label: "Stack", href: "#stack", icon: Icons.server },
+    { label: "Contato", href: "#contato", icon: Icons.mail },
   ];
 
-  return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 dark:bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-zinc-200/50 dark:border-zinc-800/50 shadow-sm"
-          : "bg-transparent"
-      }`}
+  const themeButton = (
+    <button
+      onClick={toggleTheme}
+      className="p-2 rounded-full text-zinc-700 dark:text-zinc-200 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+      aria-label="Alternar tema"
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">
-          TV<span className="text-violet-500">.</span>
-        </a>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={dark ? "moon" : "sun"}
+          initial={{ rotate: -90, opacity: 0 }}
+          animate={{ rotate: 0, opacity: 1 }}
+          exit={{ rotate: 90, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="block"
+        >
+          {dark ? Icons.moon : Icons.sun}
+        </motion.span>
+      </AnimatePresence>
+    </button>
+  );
 
-        <div className="hidden md:flex items-center gap-8">
+  return (
+    <>
+      {/* Desktop: floating glass capsule */}
+      <motion.nav
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="hidden md:block fixed top-4 left-0 right-0 z-50 px-6 pointer-events-none"
+      >
+        <div className="glass glass-strong rounded-full max-w-3xl mx-auto h-14 px-3 pl-6 flex items-center justify-between pointer-events-auto">
+          <a href="#" className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">
+            TV<span className="text-violet-500">.</span>
+          </a>
+          <div className="flex items-center gap-1">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="px-3.5 py-1.5 rounded-full text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+            {themeButton}
+          </div>
+        </div>
+      </motion.nav>
+
+      {/* Mobile: iOS-style floating tab bar */}
+      <motion.nav
+        initial={{ y: 40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="md:hidden fixed bottom-4 left-0 right-0 z-50 px-4 pointer-events-none"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      >
+        <div className="glass glass-strong rounded-full mx-auto max-w-md h-16 px-2 flex items-center justify-between pointer-events-auto">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+              className="flex-1 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-full text-zinc-600 dark:text-zinc-300 active:bg-black/5 dark:active:bg-white/10 transition-colors"
             >
-              {l.label}
+              <span className="[&>svg]:w-5 [&>svg]:h-5">{l.icon}</span>
+              <span className="text-[10px] font-medium">{l.label}</span>
             </a>
           ))}
+          <div className="pl-1 pr-1">{themeButton}</div>
         </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-            aria-label="Alternar tema"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={dark ? "moon" : "sun"}
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="block"
-              >
-                {dark ? Icons.moon : Icons.sun}
-              </motion.span>
-            </AnimatePresence>
-          </button>
-
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
-            aria-label="Menu"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
-              {mobileOpen ? (
-                <path d="M18 6 6 18M6 6l12 12" strokeLinecap="round" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 dark:bg-[#0a0a0f]/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 overflow-hidden"
-          >
-            <div className="px-6 py-4 space-y-3">
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+      </motion.nav>
+    </>
   );
 }
 
@@ -269,7 +249,7 @@ function FloatingAndroid() {
     <motion.div
       animate={{ y: [0, -12, 0] }}
       transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      className="w-[200px] bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-hidden"
+      className="w-[200px] glass glass-strong rounded-[28px] overflow-hidden"
     >
       <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
         <div className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono">Cotação App</div>
@@ -311,7 +291,7 @@ function FloatingRecruiterCard() {
     <motion.div
       animate={{ y: [0, 10, 0] }}
       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      className="w-[220px] bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-xl p-4"
+      className="w-[220px] glass glass-strong rounded-[28px] p-4"
     >
       <div className="flex items-center gap-3 mb-3">
         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-white font-bold text-sm">
@@ -358,7 +338,7 @@ function FloatingBackend() {
     <motion.div
       animate={{ y: [0, -8, 0] }}
       transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-      className="w-[210px] bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-hidden"
+      className="w-[210px] glass glass-strong rounded-[28px] overflow-hidden"
     >
       <div className="px-4 py-2 bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-100 dark:border-zinc-800 flex items-center gap-2">
         {Icons.server}
@@ -402,7 +382,7 @@ function FloatingBackend() {
 
 function Hero() {
   return (
-    <section className="min-h-screen flex items-center pt-16">
+    <section className="min-h-screen flex items-center pt-28 md:pt-32">
       <div className="max-w-6xl mx-auto px-6 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -417,16 +397,15 @@ function Hero() {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.2rem] font-bold leading-tight text-zinc-900 dark:text-white tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold leading-tight text-zinc-900 dark:text-white tracking-tight">
               Engenheiro Mobile{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-blue-500">
                 Android, iOS e KMP
-              </span>{" "}
-              e ferramentas de IA para devs
+              </span>
             </h1>
 
             <p className="mt-6 text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-xl">
-              Arquitetura limpa, código avaliável e projetos que falam por si.
+              Arquitetura limpa, ferramentas de IA para devs e projetos que falam por si.
               Foco em{" "}
               <strong className="text-zinc-700 dark:text-zinc-300">
                 Kotlin Multiplatform, Compose, SwiftUI e Ktor
@@ -437,7 +416,7 @@ function Hero() {
             <div className="flex flex-wrap gap-4 mt-8">
               <a
                 href="#projetos"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-violet-600 hover:bg-violet-700 text-white font-medium transition-colors shadow-lg shadow-violet-500/25"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-b from-violet-500 to-violet-600 text-white font-medium transition-transform hover:scale-[1.03] shadow-lg shadow-violet-500/30 ring-1 ring-inset ring-white/30"
               >
                 Ver projetos principais
                 {Icons.arrow}
@@ -446,7 +425,7 @@ function Hero() {
                 href="https://github.com/TalissonVitorino"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 font-medium transition-colors border border-zinc-200 dark:border-zinc-700"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-zinc-800 dark:text-zinc-100 font-medium transition-transform hover:scale-[1.03]"
               >
                 {Icons.github}
                 Abrir GitHub
@@ -522,7 +501,7 @@ function RecruiterSnapshot() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -4 }}
-              className="p-5 rounded-2xl bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 shadow-sm"
+              className="p-5 rounded-[28px] glass"
             >
               <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-500 mb-4">
                 {card.icon}
@@ -787,7 +766,7 @@ function ProjectCard({ project, index }) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.15 }}
       whileHover={{ y: -6 }}
-      className="group rounded-3xl bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-violet-500/30 dark:hover:border-violet-500/20 transition-all duration-300 overflow-hidden"
+      className="group rounded-[32px] glass overflow-hidden transition-transform duration-300"
     >
       <div className="p-5">{project.preview}</div>
 
@@ -966,7 +945,7 @@ function OtherProjectCard({ project, index }) {
       viewport={{ once: true }}
       transition={{ delay: (index % 3) * 0.08 }}
       whileHover={{ y: -4 }}
-      className="flex flex-col p-5 rounded-2xl bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-lg hover:border-violet-500/30 dark:hover:border-violet-500/20 transition-all"
+      className="flex flex-col p-5 rounded-[28px] glass"
     >
       <h3 className="text-base font-bold text-zinc-900 dark:text-white">{project.title}</h3>
       <p className="text-xs text-violet-500 font-medium mt-0.5">{project.tag}</p>
@@ -1035,7 +1014,7 @@ function About() {
   return (
     <Section id="sobre" className="py-24">
       <div className="max-w-3xl mx-auto px-6">
-        <div className="rounded-3xl bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 p-8 md:p-12">
+        <div className="rounded-[32px] glass p-8 md:p-12">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-6">Sobre</h2>
           <div className="space-y-4 text-zinc-500 dark:text-zinc-400 leading-relaxed">
             <p>
@@ -1109,7 +1088,7 @@ function Stack() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
               whileHover={{ scale: 1.08 }}
-              className="px-4 py-2 rounded-2xl text-sm font-medium bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-violet-500/40 hover:text-violet-600 dark:hover:text-violet-400 transition-all cursor-default shadow-sm"
+              className="px-4 py-2 rounded-full text-sm font-medium glass text-zinc-700 dark:text-zinc-200 hover:text-violet-600 dark:hover:text-violet-300 transition-colors cursor-default"
             >
               {item}
             </motion.span>
@@ -1135,7 +1114,7 @@ function Contact() {
             href="https://github.com/TalissonVitorino"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium hover:opacity-90 transition-opacity shadow-lg"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium hover:opacity-90 transition-opacity shadow-lg"
           >
             {Icons.github}
             GitHub
@@ -1144,14 +1123,14 @@ function Contact() {
             href="https://linkedin.com/in/talissonvitorino"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#0077b5] text-white font-medium hover:opacity-90 transition-opacity shadow-lg"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0077b5] text-white font-medium hover:opacity-90 transition-opacity shadow-lg"
           >
             {Icons.linkedin}
             LinkedIn
           </a>
           <a
             href="mailto:talissonv57@gmail.com"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-violet-600 text-white font-medium hover:bg-violet-700 transition-colors shadow-lg shadow-violet-500/25"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-violet-600 text-white font-medium hover:bg-violet-700 transition-colors shadow-lg shadow-violet-500/25"
           >
             {Icons.mail}
             Email
@@ -1182,7 +1161,7 @@ export default function App() {
   const [dark, toggleTheme] = useTheme();
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0a0a0f] text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+    <div className="min-h-screen text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
       <AnimatedBg />
       <Navbar dark={dark} toggleTheme={toggleTheme} />
       <Hero />
