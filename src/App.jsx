@@ -164,6 +164,7 @@ function Navbar({ dark, toggleTheme }) {
 
   const links = [
     { label: "Projetos", href: "#projetos" },
+    { label: "Outros", href: "#outros" },
     { label: "Sobre", href: "#sobre" },
     { label: "Stack", href: "#stack" },
     { label: "Contato", href: "#contato" },
@@ -318,7 +319,7 @@ function FloatingRecruiterCard() {
         </div>
         <div>
           <div className="text-sm font-semibold text-zinc-900 dark:text-white">Talisson V.</div>
-          <div className="text-[10px] text-zinc-500">Backend & Android Dev</div>
+          <div className="text-[10px] text-zinc-500">Mobile Engineer</div>
         </div>
       </div>
       <div className="space-y-2">
@@ -417,18 +418,18 @@ function Hero() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-[3.2rem] font-bold leading-tight text-zinc-900 dark:text-white tracking-tight">
-              Desenvolvedor{" "}
+              Engenheiro Mobile{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-blue-500">
-                Android e Backend
+                Android, iOS e KMP
               </span>{" "}
-              com foco em Kotlin Multiplatform
+              e ferramentas de IA para devs
             </h1>
 
             <p className="mt-6 text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-xl">
               Arquitetura limpa, código avaliável e projetos que falam por si.
               Foco em{" "}
               <strong className="text-zinc-700 dark:text-zinc-300">
-                Jetpack Compose, KMP, Ktor e Spring Boot
+                Kotlin Multiplatform, Compose, SwiftUI e Ktor
               </strong>
               .
             </p>
@@ -624,6 +625,22 @@ function GradientPreview({ from, to, label, lines }) {
 }
 
 const projects = [
+  {
+    title: "Treinouuu",
+    subtitle: "Produto full-stack \u2022 Android + iOS + Ktor",
+    description:
+      "App em KMP (Android, iOS e backend em Ktor) que conecta aluno e personal trainer em tempo real. Produto solo: arquitetura, design de produto e evolução contínua.",
+    highlights: ["Produto solo", "Tempo real", "Android + iOS + backend"],
+    stack: ["Kotlin", "KMP", "Compose Multiplatform", "Ktor", "SwiftUI"],
+    preview: (
+      <GradientPreview
+        from="from-orange-500/10"
+        to="to-violet-500/10"
+        label="Treinouuu"
+        lines={["aluno  ⇄  personal", "Android · iOS · Ktor"]}
+      />
+    ),
+  },
   {
     title: "Popcorn Guineapig",
     subtitle: "Plugin Gradle \u2022 Arquitetura em multi-módulos",
@@ -831,7 +848,7 @@ function Projects() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">
-            Projetos
+            Projetos Principais
           </h2>
           <p className="mt-3 text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto">
             Projetos reais com código aberto, documentação e decisões técnicas claras.
@@ -840,6 +857,171 @@ function Projects() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p, i) => (
             <ProjectCard key={p.title} project={p} index={i} />
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+// ─── Other Projects ──────────────────────────────────────────────────────────
+
+const otherProjects = [
+  {
+    title: "Movis",
+    tag: "KMP \u2022 Android + iOS",
+    description:
+      "App de streaming de filmes inspirado na Apple TV, com Clean Architecture + MVVM e rotas tipadas. Consome a API do TMDB.",
+    stack: ["Compose Multiplatform", "Ktor Client", "Coil 3", "TMDB"],
+    repo: "https://github.com/TalissonVitorino/Movis",
+  },
+  {
+    title: "Preços Combustíveis KMP",
+    tag: "KMP \u2022 6 alvos",
+    description:
+      "Consulta de preços de combustíveis com dados da ANP. Roda em Android, iOS, Desktop e Web (Wasm e JS), com backend em Ktor.",
+    stack: ["KMP", "Clean Architecture", "Ktor", "WasmJS"],
+    repo: "https://github.com/TalissonVitorino/PrecosCombustiveisWithKotlinMultiplatform",
+  },
+  {
+    title: "Checklist de Treino",
+    tag: "App desktop \u2022 Academia",
+    description:
+      "Controle de treinos para academias: cadastro de alunos, fichas de exercícios, histórico de sessões e dashboard. Funciona localmente, sem servidor.",
+    stack: ["Python", "Flet", "SQLite"],
+    repo: "https://github.com/TalissonVitorino/Novo_Projeto_Academia",
+  },
+  {
+    title: "World Cup Best Team Simulator",
+    tag: "Compose Multiplatform \u2022 CodandoTV",
+    description:
+      "App de exemplo da JujubaSVG: monte o time dos sonhos da Copa 2026 tocando nos jogadores sobre um campo em SVG interativo.",
+    stack: ["Compose Multiplatform", "JujubaSVG", "Android", "iOS"],
+    repo: "https://github.com/CodandoTV/WorldCupBestTeamSimulator",
+  },
+  {
+    title: "TasksFaculdade + API Spring",
+    tag: "Full-stack \u2022 Android + Spring Boot",
+    description:
+      "App Android em Compose com MVVM e StateFlow que consome uma API REST em Spring Boot com JPA. CRUD completo, tema claro e escuro.",
+    stack: ["Jetpack Compose", "StateFlow", "Spring Boot", "JPA"],
+    repo: "https://github.com/TalissonVitorino/TasksFaculdade",
+    extra: { label: "API", href: "https://github.com/TalissonVitorino/TasksFaculdade_API_Spring" },
+  },
+  {
+    title: "MiBook",
+    tag: "Flutter + FastAPI \u2022 CodandoTV",
+    description:
+      "App Flutter e servidor FastAPI (PostgreSQL, Redis e Docker) para gerenciar receitas e livros de receitas da família.",
+    stack: ["Flutter", "FastAPI", "PostgreSQL", "Redis", "Docker"],
+    repo: "https://github.com/CodandoTV/MiBook",
+    extra: { label: "Servidor", href: "https://github.com/CodandoTV/MiBook-Server" },
+  },
+  {
+    title: "StreamPlayerApp",
+    tag: "Open source \u2022 CodandoTV",
+    description:
+      "Projeto open source inspirado no app da Netflix, construído em Compose Multiplatform e mantido pela comunidade CodandoTV.",
+    stack: ["Compose Multiplatform", "Android", "Open source"],
+    repo: "https://github.com/CodandoTV/Netflix-CMP",
+  },
+  {
+    title: "Cotação Moedas (Android XML)",
+    tag: "Android nativo \u2022 MVVM",
+    description:
+      "Conversão de BRL para mais de 20 moedas com histórico dos últimos 10 dias, usando Fragments, ViewBinding e LiveData.",
+    stack: ["Kotlin", "Retrofit", "LiveData", "Coroutines"],
+    repo: "https://github.com/TalissonVitorino/CotacaoMoedasWithXML",
+  },
+  {
+    title: "todoapp_flutter",
+    tag: "Flutter \u2022 Playground",
+    description:
+      "App de tarefas em Flutter usado como laboratório de arquitetura e ferramentas, incluindo validação de regras com o EagleEye.",
+    stack: ["Flutter", "Freezed", "get_it", "EagleEye"],
+    repo: "https://github.com/CodandoTV/todoapp_flutter",
+  },
+  {
+    title: "Ktor CCCAT18",
+    tag: "Backend \u2022 Estudo",
+    description:
+      "Backend em Ktor com PostgreSQL desenvolvido durante o curso CCCAT18, com serialização e negociação de conteúdo.",
+    stack: ["Ktor", "PostgreSQL", "kotlinx.serialization"],
+    repo: "https://github.com/TalissonVitorino/ktor-cccat18",
+  },
+  {
+    title: "o.pick",
+    tag: "Produto \u2022 KMP offline-first",
+    description:
+      "Atuação em design de produto e desenvolvimento do app em KMP, com arquitetura offline-first.",
+    stack: ["KMP", "Offline-first", "Design de produto"],
+  },
+];
+
+function OtherProjectCard({ project, index }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: (index % 3) * 0.08 }}
+      whileHover={{ y: -4 }}
+      className="flex flex-col p-5 rounded-2xl bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-lg hover:border-violet-500/30 dark:hover:border-violet-500/20 transition-all"
+    >
+      <h3 className="text-base font-bold text-zinc-900 dark:text-white">{project.title}</h3>
+      <p className="text-xs text-violet-500 font-medium mt-0.5">{project.tag}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-3 leading-relaxed flex-1">
+        {project.description}
+      </p>
+      <div className="flex flex-wrap gap-1.5 mt-4">
+        {project.stack.map((t) => (
+          <Chip key={t}>{t}</Chip>
+        ))}
+      </div>
+      {(project.repo || project.extra) && (
+        <div className="flex flex-wrap gap-x-5 gap-y-2 mt-4">
+          {project.repo && (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors"
+            >
+              {Icons.github}
+              Repositório
+              {Icons.external}
+            </a>
+          )}
+          {project.extra && (
+            <a
+              href={project.extra.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+            >
+              {project.extra.label}
+              {Icons.external}
+            </a>
+          )}
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
+function OtherProjects() {
+  return (
+    <Section id="outros" className="py-24">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Outros Projetos</h2>
+          <p className="mt-3 text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto">
+            Apps, estudos e experimentos que mostram o caminho até aqui.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {otherProjects.map((p, i) => (
+            <OtherProjectCard key={p.title} project={p} index={i} />
           ))}
         </div>
       </div>
@@ -858,8 +1040,8 @@ function About() {
           <div className="space-y-4 text-zinc-500 dark:text-zinc-400 leading-relaxed">
             <p>
               Sou <strong className="text-zinc-700 dark:text-zinc-300">Talisson Vitorino</strong>,
-              desenvolvedor focado em <strong className="text-zinc-700 dark:text-zinc-300">Android e Backend</strong> com
-              o ecossistema Kotlin como base.
+              engenheiro mobile com foco em <strong className="text-zinc-700 dark:text-zinc-300">Android, iOS e Kotlin Multiplatform</strong>,
+              cursando pós-graduação em Engenharia de Software (PUC Minas).
             </p>
             <p>
               Trabalho com <strong className="text-zinc-700 dark:text-zinc-300">Jetpack Compose</strong> para interfaces
@@ -1006,6 +1188,7 @@ export default function App() {
       <Hero />
       <RecruiterSnapshot />
       <Projects />
+      <OtherProjects />
       <About />
       <Stack />
       <Contact />
